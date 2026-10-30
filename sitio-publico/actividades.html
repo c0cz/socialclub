@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividades - Los Algarrobos</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header>
+    <h1>Actividades</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="actividades.html">Actividades</a>
+      <a href="preinscripcion.html">Preinscripción</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="filtros">
+      <h2>Filtrar</h2>
+      <label for="filtroDisciplina">Disciplina</label>
+      <select id="filtroDisciplina">
+        <option value="">Todas</option>
+      </select>
+
+      <label for="filtroEdad">Edad</label>
+      <input type="number" id="filtroEdad" min="1" max="99" placeholder="Ej: 10">
+    </section>
+
+    <section id="catalogo"></section>
+  </main>
+
+  <footer>
+    <p>© 2026 Club Los Algarrobos</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
