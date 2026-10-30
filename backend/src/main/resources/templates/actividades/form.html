@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad</title>
+  <link rel="stylesheet" th:href="@{/css/backoffice.css}">
+</head>
+<body>
+  <div th:replace="~{fragments/layout :: encabezado}"></div>
+
+  <main>
+    <h2 th:text="${titulo}"></h2>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <form th:action="@{/actividades/guardar}" th:object="${actividad}" method="post">
+      <input type="hidden" th:field="*{id}">
+
+      <label>Nombre</label>
+      <input type="text" th:field="*{nombre}" required>
+
+      <label>Disciplina</label>
+      <input type="text" th:field="*{disciplina}" required>
+
+      <label>Profesor/a</label>
+      <input type="text" th:field="*{profesor}">
+
+      <label>Días</label>
+      <input type="text" th:field="*{dias}">
+
+      <label>Horario</label>
+      <input type="text" th:field="*{horario}">
+
+      <label>Edad mínima</label>
+      <input type="number" th:field="*{edadMinima}" min="0" required>
+
+      <label>Edad máxima</label>
+      <input type="number" th:field="*{edadMaxima}" min="0" required>
+
+      <label>Cupo máximo</label>
+      <input type="number" th:field="*{cupoMaximo}" min="1" required>
+
+      <label>Cuota mensual ($)</label>
+      <input type="number" th:field="*{cuotaMensual}" min="0" step="1" required>
+
+      <button type="submit">Guardar</button>
+      <a th:href="@{/actividades}">Cancelar</a>
+    </form>
+  </main>
+
+  <div th:replace="~{fragments/layout :: pie}"></div>
+</body>
+</html>

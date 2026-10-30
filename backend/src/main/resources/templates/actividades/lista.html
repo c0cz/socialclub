@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividades</title>
+  <link rel="stylesheet" th:href="@{/css/backoffice.css}">
+</head>
+<body>
+  <div th:replace="~{fragments/layout :: encabezado}"></div>
+
+  <main>
+    <h2>Actividades</h2>
+
+    <p class="ok" th:if="${mensaje}" th:text="${mensaje}"></p>
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <a class="boton" th:href="@{/actividades/nueva}">+ Nueva actividad</a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Disciplina</th>
+          <th>Días y horario</th>
+          <th>Edades</th>
+          <th>Cupo disponible</th>
+          <th>Cuota</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="a : ${actividades}">
+          <td th:text="${a.nombre}"></td>
+          <td th:text="${a.disciplina}"></td>
+          <td th:text="${a.dias} + ' ' + ${a.horario}"></td>
+          <td th:text="${a.edadMinima} + ' a ' + ${a.edadMaxima}"></td>
+          <td th:text="${cupos[a.id]} + ' / ' + ${a.cupoMaximo}"></td>
+          <td th:text="'$ ' + ${#numbers.formatDecimal(a.cuotaMensual, 0, 'POINT', 0, 'COMMA')}"></td>
+          <td>
+            <a th:href="@{/actividades/{id}/editar(id=${a.id})}">Editar</a>
+            <form th:action="@{/actividades/{id}/eliminar(id=${a.id})}" method="post"
+                  onsubmit="return confirm('¿Eliminar esta actividad?');">
+              <button type="submit">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(actividades)}">
+          <td colspan="7">No hay actividades cargadas.</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <div th:replace="~{fragments/layout :: pie}"></div>
+</body>
+</html>

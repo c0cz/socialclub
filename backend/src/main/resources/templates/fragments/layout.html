@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<header th:fragment="encabezado">
+  <h1>SocioClub - Los Algarrobos</h1>
+  <nav>
+    <a th:href="@{/actividades}">Actividades</a>
+    <a th:href="@{/socios}">Socios</a>
+  </nav>
+</header>
+
+<footer th:fragment="pie">
+  <p>© 2026 Club Los Algarrobos - Sistema de secretaría</p>
+</footer>
+
+</body>
+</html>
