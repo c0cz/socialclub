@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preinscripción - Los Algarrobos</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <header>
+    <h1>Preinscripción</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="actividades.html">Actividades</a>
+      <a href="preinscripcion.html">Preinscripción</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="formulario">
+      <h2>Dejá tus datos</h2>
+
+      <form id="formPreinscripcion" novalidate>
+        <div class="campo">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre">
+          <span class="error" id="error-nombre"></span>
+        </div>
+
+        <div class="campo">
+          <label for="apellido">Apellido</label>
+          <input type="text" id="apellido">
+          <span class="error" id="error-apellido"></span>
+        </div>
+
+        <div class="campo">
+          <label for="dni">DNI (sin puntos)</label>
+          <input type="text" id="dni" placeholder="Ej: 40123456">
+          <span class="error" id="error-dni"></span>
+        </div>
+
+        <div class="campo">
+          <label for="email">Email</label>
+          <input type="text" id="email" placeholder="nombre@correo.com">
+          <span class="error" id="error-email"></span>
+        </div>
+
+        <div class="campo">
+          <label for="actividad">Actividad de interés</label>
+          <select id="actividad">
+            <option value="">Elegí una actividad</option>
+          </select>
+          <span class="error" id="error-actividad"></span>
+        </div>
+
+        <button type="submit">Enviar preinscripción</button>
+        <button type="button" id="btnVolver">Volver</button>
+      </form>
+
+      <p id="mensajeExito"></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Club Los Algarrobos</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

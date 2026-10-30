@@ -53,3 +53,28 @@ input[type="text"] {
     grid-template-columns: 1fr;
   }
 }
+
+
+.campo {
+  margin-bottom: 1rem;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.error {
+  color: #c62828;
+  font-size: 0.85rem;
+}
+
+#formulario {
+  padding: 1rem;
+  max-width: 500px;
+}
+
+#mensajeExito {
+  color: #1b5e20;
+  font-weight: bold;
+}

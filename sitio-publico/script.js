@@ -92,3 +92,85 @@ if (catalogo) {
   cargarDisciplinas();
   mostrarActividades(actividades);
 }
+
+
+
+// ----- PREINSCRIPCIÓN -----
+
+// RN7: 7 u 8 dígitos numéricos, sin puntos
+function esDniValido(dni) {
+  return /^\d{7,8}$/.test(dni);
+}
+
+function esEmailValido(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Escribe el mensaje de error junto a su campo
+function mostrarError(campo, mensaje) {
+  document.getElementById("error-" + campo).textContent = mensaje;
+}
+
+const formulario = document.getElementById("formPreinscripcion");
+
+if (formulario) {
+  const selectActividad = document.getElementById("actividad");
+
+  // Reutilizamos el arreglo de actividades para llenar el select
+  actividades.forEach(function (act) {
+    const opcion = document.createElement("option");
+    opcion.value = act.nombre;
+    opcion.textContent = act.nombre;
+    selectActividad.appendChild(opcion);
+  });
+
+  formulario.addEventListener("submit", function (evento) {
+    evento.preventDefault(); // evita que la página se recargue
+
+    const nombre = document.getElementById("nombre").value.trim();
+    const apellido = document.getElementById("apellido").value.trim();
+    const dni = document.getElementById("dni").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const actividad = selectActividad.value;
+
+    let hayErrores = false;
+
+    // Limpiamos errores anteriores
+    ["nombre", "apellido", "dni", "email", "actividad"].forEach(function (c) {
+      mostrarError(c, "");
+    });
+    document.getElementById("mensajeExito").textContent = "";
+
+    if (nombre === "") {
+      mostrarError("nombre", "El nombre es obligatorio");
+      hayErrores = true;
+    }
+    if (apellido === "") {
+      mostrarError("apellido", "El apellido es obligatorio");
+      hayErrores = true;
+    }
+    if (!esDniValido(dni)) {
+      mostrarError("dni", "El DNI debe tener 7 u 8 números, sin puntos");
+      hayErrores = true;
+    }
+    if (!esEmailValido(email)) {
+      mostrarError("email", "Ingresá un email válido");
+      hayErrores = true;
+    }
+    if (actividad === "") {
+      mostrarError("actividad", "Elegí una actividad");
+      hayErrores = true;
+    }
+
+    if (!hayErrores) {
+      document.getElementById("mensajeExito").textContent =
+        "¡Gracias " + nombre + "! Recibimos tu preinscripción.";
+      formulario.reset();
+    }
+  });
+
+  // Objeto del navegador: history
+  document.getElementById("btnVolver").addEventListener("click", function () {
+    history.back();
+  });
+}
