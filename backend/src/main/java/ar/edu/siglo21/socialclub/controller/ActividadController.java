@@ -84,4 +84,17 @@ public class ActividadController {
         }
         return "redirect:/actividades";
     }
+    @GetMapping("/{id}/inscriptos")
+    public String inscriptos(@PathVariable Long id, Model model, RedirectAttributes redirect) {
+        try {
+            Actividad actividad = actividadService.buscarPorId(id);
+            model.addAttribute("actividad", actividad);
+            model.addAttribute("inscripciones", inscripcionService.activasDeActividad(id));
+            model.addAttribute("cupoDisponible", inscripcionService.cupoDisponible(actividad));
+            return "actividades/inscriptos";
+        } catch (RecursoNoEncontradoException e) {
+            redirect.addFlashAttribute("error", e.getMessage());
+            return "redirect:/actividades";
+        }
+    }
 }

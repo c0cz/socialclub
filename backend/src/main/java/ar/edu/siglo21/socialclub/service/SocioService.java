@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
+import java.util.List;
 
 @Service
 public class SocioService {
@@ -52,5 +54,8 @@ public class SocioService {
         });
 
         return socioRepository.save(socio);
+    }
+        public List<Socio> listarTodos() {
+        return socioRepository.findAll(Sort.by("apellido"));
     }
 }

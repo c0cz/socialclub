@@ -39,6 +39,7 @@
           <td th:text="'$ ' + ${#numbers.formatDecimal(a.cuotaMensual, 0, 'POINT', 0, 'COMMA')}"></td>
           <td>
             <a th:href="@{/actividades/{id}/editar(id=${a.id})}">Editar</a>
+            <a th:href="@{/actividades/{id}/inscriptos(id=${a.id})}">Inscriptos</a>
             <form th:action="@{/actividades/{id}/eliminar(id=${a.id})}" method="post"
                   onsubmit="return confirm('¿Eliminar esta actividad?');">
               <button type="submit">Eliminar</button>
@@ -47,6 +48,7 @@
         </tr>
         <tr th:if="${#lists.isEmpty(actividades)}">
           <td colspan="7">No hay actividades cargadas.</td>
+          
         </tr>
       </tbody>
     </table>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscribir socio</title>
+  <link rel="stylesheet" th:href="@{/css/backoffice.css}">
+</head>
+<body>
+  <div th:replace="~{fragments/layout :: encabezado}"></div>
+
+  <main>
+    <h2>Inscribir un socio a una actividad</h2>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <form th:action="@{/inscripciones/guardar}" method="post">
+      <label>Socio</label>
+      <select name="socioId" required>
+        <option value="">Elegí un socio</option>
+        <option th:each="s : ${socios}" th:value="${s.id}"
+                th:selected="${s.id == socioId}"
+                th:text="${s.apellido} + ', ' + ${s.nombre} + ' (' + ${s.dni} + ')'"></option>
+      </select>
+
+      <label>Actividad</label>
+      <select name="actividadId" required>
+        <option value="">Elegí una actividad</option>
+        <option th:each="a : ${actividades}" th:value="${a.id}"
+                th:selected="${a.id == actividadId}"
+                th:text="${a.nombre}"></option>
+      </select>
+
+      <button type="submit">Inscribir</button>
+      <a th:href="@{/actividades}">Cancelar</a>
+    </form>
+  </main>
+
+  <div th:replace="~{fragments/layout :: pie}"></div>
+</body>
+</html>

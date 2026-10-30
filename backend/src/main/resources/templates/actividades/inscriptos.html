@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscriptos</title>
+  <link rel="stylesheet" th:href="@{/css/backoffice.css}">
+</head>
+<body>
+  <div th:replace="~{fragments/layout :: encabezado}"></div>
+
+  <main>
+    <h2 th:text="'Inscriptos en ' + ${actividad.nombre}"></h2>
+    <p th:text="'Cupo disponible: ' + ${cupoDisponible} + ' de ' + ${actividad.cupoMaximo}"></p>
+
+    <p class="ok" th:if="${mensaje}" th:text="${mensaje}"></p>
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>DNI</th>
+          <th>Socio</th>
+          <th>Fecha de inscripción</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="i : ${inscripciones}">
+          <td th:text="${i.socio.dni}"></td>
+          <td th:text="${i.socio.apellido} + ', ' + ${i.socio.nombre}"></td>
+          <td th:text="${#temporals.format(i.fechaInscripcion, 'dd/MM/yyyy')}"></td>
+          <td>
+            <form th:action="@{/inscripciones/{id}/baja(id=${i.id})}" method="post"
+                  onsubmit="return confirm('¿Dar de baja esta inscripción?');">
+              <button type="submit">Dar de baja</button>
+            </form>
+          </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(inscripciones)}">
+          <td colspan="4">No hay inscriptos activos.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      <a class="boton" th:href="@{/inscripciones/nueva}">+ Inscribir socio</a>
+      <a th:href="@{/actividades}">Volver a actividades</a>
+    </p>
+  </main>
+
+  <div th:replace="~{fragments/layout :: pie}"></div>
+</body>
+</html>
