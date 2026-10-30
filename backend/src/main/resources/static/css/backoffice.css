@@ -13,3 +13,10 @@ form input { padding: .4rem; width: 300px; max-width: 100%; }
 .ok { color: #1b5e20; font-weight: bold; }
 .error { color: #c62828; font-weight: bold; }
 td form { display: inline; }
+
+.busqueda { margin: 1rem 0; }
+.busqueda input { padding: .4rem; width: 250px; }
+.paginas { margin-top: 1rem; }
+.paginas a { display: inline-block; padding: .3rem .7rem; margin-right: .3rem; border: 1px solid #1b5e20; text-decoration: none; color: #1b5e20; }
+.paginas a.actual { background: #1b5e20; color: white; }
+form select { padding: .4rem; }

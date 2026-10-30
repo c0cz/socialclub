@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socio</title>
+  <link rel="stylesheet" th:href="@{/css/backoffice.css}">
+</head>
+<body>
+  <div th:replace="~{fragments/layout :: encabezado}"></div>
+
+  <main>
+    <h2 th:text="${titulo}"></h2>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+    <form th:action="@{/socios/guardar}" th:object="${socio}" method="post">
+      <input type="hidden" th:field="*{id}">
+
+      <label>DNI (sin puntos)</label>
+      <input type="text" th:field="*{dni}" required>
+
+      <label>Nombre</label>
+      <input type="text" th:field="*{nombre}" required>
+
+      <label>Apellido</label>
+      <input type="text" th:field="*{apellido}" required>
+
+      <label>Fecha de nacimiento</label>
+      <input type="date" th:field="*{fechaNacimiento}" required>
+
+      <label>Email</label>
+      <input type="text" th:field="*{email}">
+
+      <label>Teléfono</label>
+      <input type="text" th:field="*{telefono}">
+
+      <label>Estado de cuota</label>
+      <select th:field="*{estadoCuota}">
+        <option th:each="e : ${estados}" th:value="${e}" th:text="${e}"></option>
+      </select>
+
+      <button type="submit">Guardar</button>
+      <a th:href="@{/socios}">Cancelar</a>
+    </form>
+  </main>
+
+  <div th:replace="~{fragments/layout :: pie}"></div>
+</body>
+</html>
